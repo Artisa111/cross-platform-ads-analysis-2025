@@ -6,6 +6,11 @@
 -- indicators (KPIs) and performing month‑over‑month trend analysis.  The script
 -- assumes a PostgreSQL environment but can be adapted to other SQL dialects with
 -- minimal changes.
+--
+-- הסקריפט הזה מלווה את פרויקט *Cross‑Platform Advertising Campaign Performance Analysis 2025*.
+-- אני מגדיר כאן מבנה טבלה לשמירת נתוני פרסום, מדגים כיצד לטעון את מערך הנתונים לדוגמה,
+-- ומציע מספר שאילתות לחישוב מדדי ביצוע מרכזיים (KPI) ולביצוע ניתוח מגמות חודש על חודש.
+-- הסקריפט מניח סביבה של PostgreSQL אבל אני יכול להתאים אותו בקלות לדיאלקטים אחרים של SQL בשינויים מינימליים.
 
 /*
  * 1. Create table for daily advertising data
@@ -20,6 +25,18 @@
  *  - conversions: number of conversions or user actions (INTEGER)
  *  - revenue:     revenue attributed to those conversions (NUMERIC)
  */
+--
+-- 1. יצירת טבלה לנתוני פרסום יומיים
+--
+-- בכל שורה אני מציג נתונים מצטברים עבור פלטפורמה אחת ביום נתון.
+-- עמודות:
+--  - date:        היום בלוח השנה (DATE)
+--  - platform:    ערוץ הפרסום (לדוגמה, 'Facebook' או 'Google')
+--  - impressions: מספר הפעמים שהמודעות הוצגו (INTEGER)
+--  - clicks:      מספר ההקלקות על המודעות (INTEGER)
+--  - cost:        סך ההוצאה ביום במטבע של הפלטפורמה (NUMERIC)
+--  - conversions: מספר ההמרות או הפעולות (INTEGER)
+--  - revenue:     הכנסה שמיוחסת להמרות אלה (NUMERIC)
 
 DROP TABLE IF EXISTS ads_data;
 
@@ -46,6 +63,17 @@ CREATE TABLE ads_data (
 --
 -- Alternatively, use a client‑side tool such as psql’s \copy or import the
 -- data via your favorite PostgreSQL interface.
+--
+-- 2. טעינת נתונים
+--
+-- אם יש לי הרשאות superuser, אני יכול לטעון את קובץ ה‑CSV שייצאתי באמצעות פקודת COPY.
+-- אני מעדכן את נתיב הקובץ כך שיצביע למיקום של `ads_data.csv` במערכת שלי.
+--
+-- COPY ads_data
+--   FROM '/absolute/path/to/ads_data.csv'
+--   WITH (FORMAT csv, HEADER true);
+--
+-- לחילופין, אני משתמש בכלי צד לקוח כגון \copy של psql או מייבא את הנתונים דרך הממשק המועדף עלי של PostgreSQL.
 
 
 /*
@@ -56,6 +84,11 @@ CREATE TABLE ads_data (
  * (using GROUPING SETS) aggregates across all platforms to provide overall
  * performance.
  */
+--
+-- 3. חישוב KPI מצטברים לכל פלטפורמה ובסך הכול
+--
+-- בשאילתה הזו אני מחזיר את סך ההופעות, ההקלקות, ההוצאות וההכנסות ואת המדדים העיקריים CTR, CPC, CPM ו‑ROMI עבור כל פלטפורמה.
+-- השורה האחרונה (שמשתמשת ב‑GROUPING SETS) מאגדת את כל הפלטפורמות כדי לספק תמונת ביצועים כללית.
 
 SELECT COALESCE(platform, 'ALL_PLATFORMS') AS platform,
        SUM(impressions) AS total_impressions,
@@ -76,6 +109,11 @@ GROUP BY GROUPING SETS ((platform), ());
  * metrics as above.  It is useful for analysing seasonal patterns and
  * comparing performance across channels.
  */
+--
+-- 4. חישוב KPI לפי חודש ופלטפורמה
+--
+-- בשאילתה הזו אני מקבץ את הנתונים לפי חודש קלנדרי ופלטפורמה ומחשב את אותם מדדים כמו לעיל.
+-- זה שימושי לניתוח דפוסים עונתיים ולהשוואת ביצועים בין ערוצים.
 
 SELECT date_trunc('month', date) AS month,
        platform,
@@ -100,6 +138,12 @@ ORDER BY month, platform;
  * for impressions and each KPI.  This helps identify improving or declining
  * performance over time.
  */
+--
+-- 5. ניתוח מגמת חודש על חודש (MoM)
+--
+-- ביטוי הטבלה המשותפת (CTE) `monthly` מאגד את המדדים עבור כל הפלטפורמות בכל חודש.
+-- השאילתה החיצונית משווה כל חודש לחודש הקודם באמצעות פונקציית החלון LAG כדי לחשב את אחוז השינוי בהופעות ובכל KPI.
+-- זה עוזר לי לזהות מגמות של שיפור או ירידה בביצועים לאורך זמן.
 
 WITH monthly AS (
     SELECT
@@ -146,8 +190,14 @@ ORDER BY month;
  * Adjust the threshold according to your organisation’s definition of a
  * material advertising investment.
  */
+--
+-- 6. זיהוי החודשים בעלי הביצועים הטובים ביותר לפי ROMI עם הוצאה מינימלית
+--
+-- בשאילתה הזו אני מזהה חודשים שבהם ההוצאה הכוללת (העלות) עולה על סף מסוים ומסדר את התוצאות לפי ROMI בסדר יורד.
+-- ניתן להתאים את הסף בהתאם להגדרה שלך להשקעה משמעותית בפרסום.
 
 -- Set threshold for minimum monthly spend
+-- הגדר סף להוצאה חודשית מינימלית
 \set spend_threshold 100
 
 WITH monthly_platform AS (
