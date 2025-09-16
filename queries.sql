@@ -214,3 +214,68 @@ FROM monthly_platform
 WHERE cost > :spend_threshold
 ORDER BY romi DESC
 LIMIT 10;
+
+/*
+ * 7. Determine which platform outperformed the other each month
+ *
+ * This query ranks platforms within each month by ROMI and returns the
+ * platform with the highest return on marketing investment for each month.
+ * It provides a simple way to see whether Facebook or Google delivered
+ * the better return in any given period.
+ */
+--
+-- 7. קביעת איזו פלטפורמה עלתה על השנייה בכל חודש
+--
+-- השאילתה הזו מדרגת את הפלטפורמות בכל חודש לפי ROMI ומחזירה את
+-- הפלטפורמה עם החזר ההשקעה הגבוה ביותר בכל חודש.  כך ניתן לראות האם
+-- Facebook או Google סיפקו את ההחזר הטוב ביותר בכל תקופה.
+
+WITH monthly_platform AS (
+    SELECT
+        date_trunc('month', date)::DATE AS month,
+        platform,
+        ((SUM(revenue) - SUM(cost)) / NULLIF(SUM(cost),0)) AS romi
+    FROM ads_data
+    GROUP BY month, platform
+), ranked AS (
+    SELECT *,
+           ROW_NUMBER() OVER (PARTITION BY month ORDER BY romi DESC) AS rn
+    FROM monthly_platform
+)
+SELECT month,
+       platform AS top_platform,
+       romi AS top_platform_romi
+FROM ranked
+WHERE rn = 1
+ORDER BY month;
+
+/*
+ * 8. Analyze performance by day of week and platform
+ *
+ * This query calculates aggregated metrics (impressions, clicks, cost, revenue)
+ * and KPIs (CTR, CPC, CPM, ROMI) grouped by day of week and platform.  It
+ * allows me to compare how each advertising channel performs on different
+ * days of the week and identify high‑performing days for each platform.
+ */
+--
+-- 8. ניתוח ביצועים לפי יום בשבוע ופלטפורמה
+--
+-- בשאילתה הזו אני מחשב את המדדים המצטברים (הופעות, הקלקות, עלות, הכנסה)
+-- וה‑KPI (CTR, CPC, CPM, ROMI) בקיבוץ לפי יום בשבוע ופלטפורמה.  כך אני
+-- יכול להשוות איך כל ערוץ פרסום מתפקד בימים שונים בשבוע ולזהות ימים
+-- מוצלחים במיוחד לכל פלטפורמה.
+
+SELECT
+    EXTRACT(DOW FROM date) AS day_of_week,
+    platform,
+    SUM(impressions) AS impressions,
+    SUM(clicks) AS clicks,
+    SUM(cost) AS cost,
+    SUM(revenue) AS revenue,
+    (SUM(clicks)::NUMERIC / NULLIF(SUM(impressions),0))        AS ctr,
+    (SUM(cost) / NULLIF(SUM(clicks),0))                        AS cpc,
+    (SUM(cost) / NULLIF(SUM(impressions),0)) * 1000            AS cpm,
+    ((SUM(revenue) - SUM(cost)) / NULLIF(SUM(cost),0))         AS romi
+FROM ads_data
+GROUP BY day_of_week, platform
+ORDER BY day_of_week, platform;
