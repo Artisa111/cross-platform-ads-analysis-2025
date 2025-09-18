@@ -86,9 +86,11 @@ def main():
     os.makedirs(images_dir, exist_ok=True)
 
     # Plot CTR by month and platform with improved readability.  To make
-    # the chart easier to interpret, I increase the figure width, add
-    # markers at each month, rotate the labels and draw a light grid.
-    plt.figure(figsize=(12, 6))
+    # the chart easier to interpret, I enlarge the figure and reduce
+    # the number of tick labels on the x‑axis.  Using a two‑month
+    # interval prevents dates from overlapping when there are many
+    # months in the dataset.  Markers and a dashed grid aid readability.
+    plt.figure(figsize=(14, 6))
     for platform in monthly['platform'].unique():
         subset = monthly[monthly['platform'] == platform]
         # Use markers so that each monthly data point is visible and
@@ -100,11 +102,12 @@ def main():
     plt.ylabel('CTR')
     plt.legend()
     ax = plt.gca()
-    # Format x-axis ticks as Year-Month.  A month locator with
-    # interval=1 avoids overcrowding and makes the timeline clear.
+    # Format x-axis ticks as Year-Month and show every second month to
+    # avoid label overlap.  Rotating the labels further improves
+    # readability when many months are present.
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
-    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=1))
-    plt.xticks(rotation=45, ha='right')
+    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=2))
+    plt.xticks(rotation=45, ha='right', fontsize=8)
     # Add a dashed grid to aid comparison across months.
     plt.grid(True, linestyle='--', alpha=0.5)
     plt.tight_layout()
@@ -112,7 +115,7 @@ def main():
     plt.close()
 
     # Plot ROMI by month and platform using the same improved layout as the CTR chart.
-    plt.figure(figsize=(12, 6))
+    plt.figure(figsize=(14, 6))
     for platform in monthly['platform'].unique():
         subset = monthly[monthly['platform'] == platform]
         plt.plot(subset['month'], subset['ROMI'], marker='o', label=platform)
@@ -122,8 +125,8 @@ def main():
     plt.legend()
     ax = plt.gca()
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
-    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=1))
-    plt.xticks(rotation=45, ha='right')
+    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=2))
+    plt.xticks(rotation=45, ha='right', fontsize=8)
     plt.grid(True, linestyle='--', alpha=0.5)
     plt.tight_layout()
     plt.savefig(os.path.join(images_dir, 'romi_by_month_platform.png'))
