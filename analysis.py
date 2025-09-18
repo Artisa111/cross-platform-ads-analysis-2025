@@ -21,6 +21,7 @@ import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score
@@ -84,28 +85,46 @@ def main():
     images_dir = 'images'
     os.makedirs(images_dir, exist_ok=True)
 
-    # Plot CTR by month and platform.
-    plt.figure()
+    # Plot CTR by month and platform with improved readability.  To make
+    # the chart easier to interpret, I increase the figure width, add
+    # markers at each month, rotate the labels and draw a light grid.
+    plt.figure(figsize=(12, 6))
     for platform in monthly['platform'].unique():
         subset = monthly[monthly['platform'] == platform]
-        plt.plot(subset['month'], subset['CTR'], label=platform)
+        # Use markers so that each monthly data point is visible and
+        # connected by a line.  This helps distinguish months on
+        # dense x‑axes without specifying any particular colour.
+        plt.plot(subset['month'], subset['CTR'], marker='o', label=platform)
     plt.title('CTR by Month and Platform')
     plt.xlabel('Month')
     plt.ylabel('CTR')
     plt.legend()
+    ax = plt.gca()
+    # Format x-axis ticks as Year-Month.  A month locator with
+    # interval=1 avoids overcrowding and makes the timeline clear.
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=1))
+    plt.xticks(rotation=45, ha='right')
+    # Add a dashed grid to aid comparison across months.
+    plt.grid(True, linestyle='--', alpha=0.5)
     plt.tight_layout()
     plt.savefig(os.path.join(images_dir, 'ctr_by_month_platform.png'))
     plt.close()
 
-    # Plot ROMI by month and platform.
-    plt.figure()
+    # Plot ROMI by month and platform using the same improved layout as the CTR chart.
+    plt.figure(figsize=(12, 6))
     for platform in monthly['platform'].unique():
         subset = monthly[monthly['platform'] == platform]
-        plt.plot(subset['month'], subset['ROMI'], label=platform)
+        plt.plot(subset['month'], subset['ROMI'], marker='o', label=platform)
     plt.title('ROMI by Month and Platform')
     plt.xlabel('Month')
     plt.ylabel('ROMI')
     plt.legend()
+    ax = plt.gca()
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=1))
+    plt.xticks(rotation=45, ha='right')
+    plt.grid(True, linestyle='--', alpha=0.5)
     plt.tight_layout()
     plt.savefig(os.path.join(images_dir, 'romi_by_month_platform.png'))
     plt.close()
@@ -120,7 +139,7 @@ def main():
     r2 = r2_score(y_test, y_pred)
 
     # Plot predicted vs actual ROMI to visualise model performance.
-    plt.figure()
+    plt.figure(figsize=(6, 6))
     plt.scatter(y_test, y_pred, alpha=0.5)
     plt.xlabel('Actual ROMI')
     plt.ylabel('Predicted ROMI')

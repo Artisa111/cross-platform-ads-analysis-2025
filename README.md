@@ -3,17 +3,16 @@
 ## About me / על עצמי
 
 ### 🇬🇧 English
-I am a data analyst with a focus on digital marketing.  I built this project
-to demonstrate how I evaluate the effectiveness of advertising campaigns
-across multiple platforms using both SQL and Python.  My goal was to
-derive actionable insights and present them clearly for non‑technical
-stakeholders.
+Data analyst.  I built this project to demonstrate how I evaluate the
+effectiveness of advertising campaigns across multiple platforms using both
+SQL and Python.  My goal was to derive actionable insights and present them
+clearly for non‑technical stakeholders.
 
 ### 🇮🇱 עברית
-אני אנליסט נתונים שמתמקד בשיווק דיגיטלי.  בניתי את הפרויקט הזה כדי
-להראות כיצד אני מעריך את יעילותן של קמפיינים פרסומיים במספר
-פלטפורמות באמצעות SQL ו‑Python.  המטרה שלי הייתה להפיק תובנות
-מעשיות ולהציג אותן בצורה ברורה גם לקהל לא טכני.
+אנליסט נתונים.  בניתי את הפרויקט הזה כדי להראות כיצד אני
+מעריך את יעילותן של קמפיינים פרסומיים במספר פלטפורמות באמצעות
+SQL ו‑Python.  המטרה שלי הייתה להפיק תובנות מעשיות ולהציג אותן
+בצורה ברורה גם לקהל לא טכני.
 
 ## Project overview / סקירת הפרויקט
 
@@ -41,14 +40,14 @@ model to predict ROMI.
 ### 🇬🇧 English
 I evaluated campaign performance using four key metrics:
 
-- **CPC** – the amount paid for every click.  A low CPC means clicks are
-  cheap while a high CPC indicates that each click is expensive【948272032911912†L162-L168】.
-- **CPM** – the average cost per thousand impressions.  CPM is useful when
-  the goal is brand awareness【948272032911912†L229-L247】.
-- **CTR** – the percentage of impressions that resulted in a click【948272032911912†L382-L392】.  High
-  CTR suggests that the creative and targeting resonate with the audience.
-- **ROMI** – the ratio of net profit to marketing spend【494841379040022†L36-L45】.  It tells me whether
-  the revenue generated covers the advertising cost.
+ - **CPC** – the amount paid for every click.  A low CPC means clicks are
+   cheap while a high CPC indicates that each click is expensive.
+ - **CPM** – the average cost per thousand impressions.  CPM is useful when
+   the goal is brand awareness.
+ - **CTR** – the percentage of impressions that resulted in a click.  High
+   CTR suggests that the creative and targeting resonate with the audience.
+ - **ROMI** – the ratio of net profit to marketing spend.  It tells me whether
+   the revenue generated covers the advertising cost.
 
 These metrics complement each other: CPC and CPM measure spending
 efficiency, CTR captures engagement, and ROMI reflects profitability.
@@ -56,14 +55,14 @@ efficiency, CTR captures engagement, and ROMI reflects profitability.
 ### 🇮🇱 עברית
 הערכתי את ביצועי הקמפיין באמצעות ארבעה מדדים עיקריים:
 
-- **CPC** – הסכום ששילמתי עבור כל הקלקה; CPC נמוך מצביע על הקלקות
-  זולות בעוד CPC גבוה מעיד על עלות גבוהה לכל הקלקה【948272032911912†L162-L168】.
-- **CPM** – עלות ממוצעת לאלף חשיפות; המדד שימושי כאשר המטרה היא
-  מודעות למותג【948272032911912†L229-L247】.
-- **CTR** – אחוז החשיפות שהובילו להקלקה【948272032911912†L382-L392】; CTR
-  גבוה מעיד שהקריאייטיב והטירגוט מדויקים.
-- **ROMI** – היחס בין הרווח נטו להוצאה על שיווק【494841379040022†L36-L45】; המדד מראה אם ההכנסות
-  מכסות את עלות הפרסום.
+ - **CPC** – הסכום ששילמתי עבור כל הקלקה; CPC נמוך מצביע על הקלקות
+   זולות בעוד CPC גבוה מעיד על עלות גבוהה לכל הקלקה.
+ - **CPM** – עלות ממוצעת לאלף חשיפות; המדד שימושי כאשר המטרה היא
+   מודעות למותג.
+ - **CTR** – אחוז החשיפות שהובילו להקלקה; CTR
+   גבוה מעיד שהקריאייטיב והטירגוט מדויקים.
+ - **ROMI** – היחס בין הרווח נטו להוצאה על שיווק; המדד מראה אם ההכנסות
+   מכסות את עלות הפרסום.
 
 מדדים אלה משלימים זה את זה: CPC ו‑CPM מודדים יעילות הוצאה, CTR משקף
 מעורבות ו‑ROMI מבטא רווחיות.
@@ -363,12 +362,10 @@ Follow these steps to reproduce the analysis:
    תיקיית `images/`.
 
 ## Sources / מקורות
-
-- **CPC and CPM definitions** – Pathlabs’ guide explains cost per click
-  and cost per mille【948272032911912†L162-L168】【948272032911912†L229-L247】.
-- **CTR definition** – The same guide defines click‑through rate【948272032911912†L382-L392】.
-- **ROMI definition and formula** – BidsCube’s glossary describes return
-  on marketing investment and its calculation【494841379040022†L36-L45】.
+The definitions of CPC, CPM, CTR and ROMI used in this project follow
+commonly accepted industry standards.  I refer to authoritative
+marketing glossaries and textbooks to ensure that my calculations are
+consistent with professional practice.
 
 אני מתייחס להגדרות ולפרשנויות של המדדים ממקורות מוסמכים כדי
 לוודא שהחישובים שלי עקביים עם הנהוג בתעשייה.

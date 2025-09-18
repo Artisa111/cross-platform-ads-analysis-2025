@@ -69,8 +69,9 @@ def main() -> None:
     images_dir = os.path.join(script_dir, 'images')
     os.makedirs(images_dir, exist_ok=True)
 
-    # Plot average CTR by day of week and platform.
-    plt.figure()
+    # Plot average CTR by day of week and platform.  Increase figure size
+    # and rotate the x‑axis labels so that weekday names are easy to read.
+    plt.figure(figsize=(8, 5))
     for platform in ads['platform'].unique():
         subset = day_platform[day_platform['platform'] == platform]
         # Sort days by the natural order of the week for readability
@@ -82,6 +83,9 @@ def main() -> None:
     plt.xlabel('Day of Week')
     plt.ylabel('Average CTR')
     plt.legend()
+    plt.xticks(rotation=45, ha='right')
+    # Add a subtle grid to improve readability across weekdays.
+    plt.grid(True, linestyle='--', alpha=0.5)
     plt.tight_layout()
     plt.savefig(os.path.join(images_dir, 'ctr_by_day_platform.png'))
     plt.close()
@@ -107,10 +111,13 @@ def main() -> None:
     # the most influential variables.
     importances = pd.Series(rf.feature_importances_, index=features)
     importances = importances.sort_values(ascending=True)
-    plt.figure()
+    # Use a wider figure for the horizontal bar chart of feature importances.
+    plt.figure(figsize=(8, 5))
     importances.plot(kind='barh')
     plt.title('Feature Importance for ROMI Prediction (Random Forest)')
     plt.xlabel('Importance')
+    # Add a vertical grid to assist comparison of feature importance values.
+    plt.grid(True, axis='x', linestyle='--', alpha=0.5)
     plt.tight_layout()
     plt.savefig(os.path.join(images_dir, 'romi_feature_importance.png'))
     plt.close()
