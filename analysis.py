@@ -86,11 +86,12 @@ def main():
     os.makedirs(images_dir, exist_ok=True)
 
     # Plot CTR by month and platform with improved readability.  To make
-    # the chart easier to interpret, I enlarge the figure and reduce
-    # the number of tick labels on the x‑axis.  Using a two‑month
-    # interval prevents dates from overlapping when there are many
-    # months in the dataset.  Markers and a dashed grid aid readability.
-    plt.figure(figsize=(14, 6))
+    # the chart easier to interpret, I enlarge the figure and further
+    # reduce the number of tick labels on the x‑axis.  Using a three‑month
+    # interval prevents date labels from crowding together when there
+    # are many months in the dataset.  Markers and a dashed grid aid
+    # readability.
+    plt.figure(figsize=(16, 6))
     for platform in monthly['platform'].unique():
         subset = monthly[monthly['platform'] == platform]
         # Use markers so that each monthly data point is visible and
@@ -106,7 +107,11 @@ def main():
     # avoid label overlap.  Rotating the labels further improves
     # readability when many months are present.
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
-    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=2))
+    # Show only every third month on the x‑axis.  Displaying fewer labels
+    # ensures they have enough space and do not overlap or become
+    # illegible.  The combination of a larger figure size and fewer
+    # ticks keeps the chart readable even when there are many months.
+    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=3))
     plt.xticks(rotation=45, ha='right', fontsize=8)
     # Add a dashed grid to aid comparison across months.
     plt.grid(True, linestyle='--', alpha=0.5)
@@ -125,7 +130,10 @@ def main():
     plt.legend()
     ax = plt.gca()
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
-    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=2))
+    # Use a three‑month tick interval on the ROMI chart as well to match
+    # the CTR chart.  This prevents x‑axis labels from overlapping
+    # while still showing seasonal trends across the time range.
+    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=3))
     plt.xticks(rotation=45, ha='right', fontsize=8)
     plt.grid(True, linestyle='--', alpha=0.5)
     plt.tight_layout()
