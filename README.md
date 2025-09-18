@@ -1,5 +1,5 @@
 # Cross‑Platform Advertising Campaign Performance Analysis (2025)
-
+![Cross‑platform marketing illustration](illustration.png)
 ## About me / על עצמי
 
 ### 🇬🇧 English
