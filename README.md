@@ -8,7 +8,7 @@ effectiveness of advertising campaigns across multiple platforms using both
 SQL and Python.  My goal was to derive actionable insights and present them
 clearly for non‑technical stakeholders.
 
-### 🇮🇱 עברית
+### 🇮🇱 Hebrew
 אנליסט נתונים.  בניתי את הפרויקט הזה כדי להראות כיצד אני
 מעריך את יעילותן של קמפיינים פרסומיים במספר פלטפורמות באמצעות
 SQL ו‑Python.  המטרה שלי הייתה להפיק תובנות מעשיות ולהציג אותן
@@ -26,7 +26,7 @@ investment (ROMI).  I then extended the analysis in Python to
 visualise monthly trends, compare channels and build a linear regression
 model to predict ROMI.
 
-### 🇮🇱 עברית
+### 🇮🇱 Hebrew
 בפרויקט הזה ניתחתי נתונים יומיים סינתטיים של מודעות בפייסבוק ובגוגל
 לתקופה שבין **1 בינואר 2024** לבין **31 באוגוסט 2025**.  יצרתי טבלה
 ב‑PostgreSQL, הטענתי את הנתונים וחישבתי מדדי ביצוע מרכזיים כגון עלות
@@ -52,7 +52,7 @@ I evaluated campaign performance using four key metrics:
 These metrics complement each other: CPC and CPM measure spending
 efficiency, CTR captures engagement, and ROMI reflects profitability.
 
-### 🇮🇱 עברית
+### 🇮🇱 Hebrew
 הערכתי את ביצועי הקמפיין באמצעות ארבעה מדדים עיקריים:
 
  - **CPC** – הסכום ששילמתי עבור כל הקלקה; CPC נמוך מצביע על הקלקות
@@ -111,7 +111,7 @@ time.  Facebook generally achieves higher CTR and lower CPM, while
 Google delivers fewer but possibly higher‑value conversions.  Because
 the dataset is artificial, it is safe to publish as part of a portfolio.
 
-### 🇮🇱 עברית
+### 🇮🇱 Hebrew
 קובץ [`ads_data.csv`](./ads_data.csv) מכיל נתונים יומיים סינתטיים
 לפייסבוק ולגוגל.  כל שורה כוללת את התאריך, הפלטפורמה, מספר
 החשיפות, ההקלקות, העלות, ההמרות וההכנסות.  הנתונים נוצרו כך
@@ -138,7 +138,7 @@ file and calculate KPIs.  The script includes:
 These queries allowed me to understand performance differences between
 channels and identify periods of exceptional return.
 
-### 🇮🇱 עברית
+### 🇮🇱 Hebrew
 כתבתי את [queries.sql](./queries.sql) כדי להגדיר את הטבלה, לטעון את קובץ
 ה‑CSV ולחשב את מדדי הביצוע.  הסקריפט כולל:
 
@@ -188,7 +188,7 @@ embedded below.
 
 ![Predicted vs actual ROMI](./images/romi_prediction_scatter.png)
 
-### 🇮🇱 עברית
+### 🇮🇱 Hebrew
 כדי להעמיק את הניתוח כתבתי [סקריפט ב‑Python](./analysis.py) שקורא את
 קובץ ה‑CSV, מחשב את אותם KPI, מאגד אותם לפי פלטפורמה וחודש
 ומאמן מודל רגרסיה ליניארית לחיזוי ROMI באמצעות חשיפות, הקלקות,
@@ -285,7 +285,7 @@ Based on the SQL and Python analysis, my key takeaways are:
     performs better mid‑week.  Allocate budget toward these high‑performing
     days to maximise efficiency.
 
-### 🇮🇱 עברית
+### 🇮🇱 Hebrew
 בהתבסס על הניתוח ב‑SQL ו‑Python, המסקנות העיקריות שלי הן:
 
 - **להתמקד בפייסבוק:** לאורך כל התקופה פייסבוק הניבה CTR גבוה
@@ -340,7 +340,7 @@ Follow these steps to reproduce the analysis:
    `ctr_by_day_platform.png` and `romi_feature_importance.png` to the
    `images/` directory.
 
-### 🇮🇱 עברית
+### 🇮🇱 Hebrew
 הוראות לשחזור הניתוח:
 
 1. **התקנת PostgreSQL** – התקן PostgreSQL 13 ומעלה ויצור מסד
