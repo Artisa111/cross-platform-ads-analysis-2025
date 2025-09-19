@@ -1,0 +1,10 @@
+Advanced Analysis Summary
+Random Forest R-squared: 0.4960
+
+Feature Importances:
+- CTR: 0.0493
+- clicks: 0.0727
+- CPM: 0.1022
+- impressions: 0.1055
+- conversions: 0.2928
+- CPC: 0.3774

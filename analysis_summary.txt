@@ -1,0 +1,7 @@
+Aggregated metrics by platform:
+              CTR       CPC       CPM      ROMI
+platform                                       
+Facebook  0.03687  0.189166  6.974640  9.208039
+Google    0.02486  0.322513  8.017726  6.132894
+
+Linear Regression R-squared: 0.6035
