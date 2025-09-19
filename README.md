@@ -70,7 +70,7 @@ efficiency, CTR captures engagement, and ROMI reflects profitability.
 ## Project story and challenges / סיפור הפרויקט ואתגרים
 
 ### 🇬🇧 English
-I began this portfolio project by generating a realistic dataset that spans
+I began this portfolio project by generating a synthetic dataset that spans
 2024–2025 and includes daily performance metrics for Facebook and
 Google. My goal was to compare the two channels and decide where to
 allocate advertising spend. Along the way I encountered several
@@ -86,12 +86,12 @@ comprehensive pipeline that not only crunches numbers but tells a
 cohesive story of my analytical process.
 
 ### 🇮🇱 עברית
-התחלתי את פרויקט הפורטפוליו הזה ביצירת מערך נתונים מציאותי
+התחלתי את פרויקט הפורטפוליו הזה ביצירת מערך נתונים סינתטי
 שמשתרע על פני השנים 2024–2025 וכולל מדדי ביצועים יומיים לפייסבוק
 ולגוגל. המטרה שלי הייתה להשוות בין שני הערוצים ולהחליט היכן
 להקצות את תקציב הפרסום. במהלך העבודה נתקלתי בכמה אתגרים.
 תחילה הייתי צריך לנקות ולבנות את הנתונים הסינתטיים כך שיתנהגו
-כמו בסיס נתונים אמיתי של קמפיין. לאחר מכן כווננתי את שאילתות ה‑SQL
+כמו בסיס נתונים סינתטי של קמפיין. לאחר מכן כווננתי את שאילתות ה‑SQL
 כדי לאגד מיליוני הופעות ביעילות ובדקתי שה‑KPI המחושבים עולים בקנה
 אחד עם הגדרות המקובלות בתעשייה. לבסוף שמתי לב לתנודתיות משבוע
 לשבוע בעלויות ובהכנסות, שהקשתה על זיהוי מגמות ארוכות טווח.
@@ -106,7 +106,7 @@ cohesive story of my analytical process.
 The file [`ads_data.csv`](./ads_data.csv) contains synthetic daily records
 for Facebook and Google.  Each row includes the date, platform,
 impressions, clicks, cost, conversions and revenue.  The data was
-generated to reflect realistic growth in budget and engagement over
+generated to reflect synthetic growth in budget and engagement over
 time.  Facebook generally achieves higher CTR and lower CPM, while
 Google delivers fewer but possibly higher‑value conversions.  Because
 the dataset is artificial, it is safe to publish as part of a portfolio.
@@ -115,7 +115,7 @@ the dataset is artificial, it is safe to publish as part of a portfolio.
 קובץ [`ads_data.csv`](./ads_data.csv) מכיל נתונים יומיים סינתטיים
 לפייסבוק ולגוגל.  כל שורה כוללת את התאריך, הפלטפורמה, מספר
 החשיפות, ההקלקות, העלות, ההמרות וההכנסות.  הנתונים נוצרו כך
-שישקפו צמיחה ריאלית בתקציב ובמעורבות לאורך זמן.  בדרך כלל,
+שישקפו צמיחה סינתטית בתקציב ובמעורבות לאורך זמן.  בדרך כלל,
 פייסבוק מגיעה ל‑CTR גבוה יותר ו‑CPM נמוך יותר, בעוד שגוגל מביאה
 פחות, אך ייתכן שהמרות באיכות גבוהה יותר.  מאחר שמדובר בנתונים
 מלאכותיים, ניתן לפרסם אותם בפורטפוליו.
