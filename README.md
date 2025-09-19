@@ -369,3 +369,10 @@ consistent with professional practice.
 
 אני מתייחס להגדרות ולפרשנויות של המדדים ממקורות מוסמכים כדי
 לוודא שהחישובים שלי עקביים עם הנהוג בתעשייה.
+
+---
+<div align="center">
+
+**💜 נוצר באהבה לאנליטיקת נתונים**
+
+</div>
